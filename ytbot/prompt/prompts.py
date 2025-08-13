@@ -21,6 +21,8 @@ Please summarize the following YouTube video transcript:
 
 {transcript}
 
+IMPORTANT: DO NOT USE MARKDOWN WHEN GENERATING RESPONSE
+
 Summary:"""
     
     # Create the PromptTemplate object with the defined template

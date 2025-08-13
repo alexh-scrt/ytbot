@@ -1,12 +1,14 @@
 # Import necessary libraries for the YouTube bot
 import gradio as gr
-
+from ytbot.llm import (
+    Settings
+)
 from ytbot import (
     answer_question,
     summarize_video
 )
 
-def launch_ui():
+def launch_ui(settings: Settings):
     txt_value: str = ""
     with gr.Blocks() as interface:
 

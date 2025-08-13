@@ -3,16 +3,16 @@ from ytbot.yt.process import (
     process_transcript
 )
 from ytbot.llm import (
-    setup_ollama_config,
     initialize_ollama_llm,
-    define_parameters,
-    setup_embedding_model,
     create_summary_chain,
-    create_qa_chain
+    get_settings,
 )
 from ytbot.prompt import (
-    create_qa_prompt_template,
     create_summary_prompt
+)
+from ytbot.llm import (
+    Settings,
+    get_params
 )
 
 def summarize_video(video_url):
@@ -31,7 +31,7 @@ def summarize_video(video_url):
     """
     global fetched_transcript, processed_transcript
     
-    
+    settings = get_settings()
     if video_url:
         # Fetch and preprocess transcript
         fetched_transcript = get_transcript(video_url)
@@ -41,10 +41,10 @@ def summarize_video(video_url):
 
     if processed_transcript:
         # Step 1: Set up Ollama configuration
-        model_id, base_url, embedding_model_id = setup_ollama_config()
+        params = get_params("summarization", context_tokens=16384, overrides={"num_predict": 384})
 
         # Step 2: Initialize Ollama LLM for summarization
-        llm = initialize_ollama_llm(model_id, base_url, define_parameters())
+        llm = initialize_ollama_llm(settings.llm, params)
 
         # Step 3: Create the summary prompt and chain
         summary_prompt = create_summary_prompt()

@@ -3,12 +3,10 @@ from ytbot.yt import (
     process_transcript,
 )
 from ytbot.llm import (
-    setup_ollama_config,
     initialize_ollama_llm,
-    define_parameters,
     setup_embedding_model,
-    create_summary_chain,
-    create_qa_chain
+    create_qa_chain,
+    get_params
 )
 from ytbot.store import (
     create_chroma_collection,
@@ -16,10 +14,15 @@ from ytbot.store import (
 )
 from ytbot.prompt import (
     create_qa_prompt_template,
-    create_summary_prompt
 )
 from ytbot.qa import (
     generate_answer
+)
+from ytbot.llm import (
+    Settings,
+    LLMSettings,
+    get_settings,
+    get_params
 )
 
 processed_transcript = False
@@ -43,6 +46,7 @@ def answer_question(video_url, user_question):
     """
     global fetched_transcript, processed_transcript
 
+    settings = get_settings()
     # Check if the transcript needs to be fetched
     if not processed_transcript:
         if video_url:
@@ -57,13 +61,13 @@ def answer_question(video_url, user_question):
         chunks = chunk_transcript(processed_transcript)
 
         # Step 2: Set up Ollama configuration
-        model_id, base_url, embedding_model_id = setup_ollama_config()
+        params = get_params("qa", context_tokens=32768)  # if your model supports large ctx
 
         # Step 3: Initialize Ollama LLM for Q&A
-        llm = initialize_ollama_llm(model_id, base_url, define_parameters())
+        llm = initialize_ollama_llm(settings.llm, params)
 
         # Step 4: Create ChromaDB collection for transcript chunks (only needed for Q&A)
-        embedding_model = setup_embedding_model(base_url, embedding_model_id)
+        embedding_model = setup_embedding_model(settings.llm)
         chroma_collection = create_chroma_collection(chunks, embedding_model)
 
         # Step 5: Set up the Q&A prompt and chain
