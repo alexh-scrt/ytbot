@@ -1,0 +1,200 @@
+/* YouTube-inspired styling for the YouTube Bot interface */
+
+/* Global variables matching YouTube's design system */
+:root {
+    --yt-spec-base-background: #0f0f0f;
+    --yt-spec-raised-background: #212121;
+    --yt-spec-menu-background: #282828;
+    --yt-spec-text-primary: #f1f1f1;
+    --yt-spec-text-secondary: #aaaaaa;
+    --yt-spec-text-disabled: #717171;
+    --yt-spec-icon-inactive: #909090;
+    --yt-spec-icon-active: #ffffff;
+    --yt-spec-button-chip-background-hover: #3d3d3d;
+    --yt-spec-brand-button-text: #065fd4;
+    --yt-spec-call-to-action: #cc0000;
+    --yt-spec-suggested-action: #263850;
+    --yt-spec-outline: #303030;
+    --yt-spec-wordmark-text: #ff0000;
+    --yt-spec-red: #ff0033;
+}
+
+/* Main container styling */
+.gradio-container {
+    background-color: var(--yt-spec-base-background) !important;
+    color: var(--yt-spec-text-primary) !important;
+    font-family: "YouTube Sans", "Roboto", sans-serif !important;
+    min-height: 100vh;
+}
+
+/* Header styling */
+.gradio-container h1,
+.gradio-container h2,
+.gradio-container h3 {
+    color: var(--yt-spec-text-primary) !important;
+    font-weight: 500 !important;
+}
+
+.gradio-container h2 {
+    font-size: 24px !important;
+    margin-bottom: 24px !important;
+    padding-bottom: 12px !important;
+    border-bottom: 1px solid var(--yt-spec-outline) !important;
+}
+
+/* Input field styling to match YouTube's search bar */
+.gradio-container .gr-textbox {
+    background-color: var(--yt-spec-raised-background) !important;
+    border: 1px solid var(--yt-spec-outline) !important;
+    border-radius: 20px !important;
+    color: var(--yt-spec-text-primary) !important;
+    padding: 12px 16px !important;
+    font-size: 16px !important;
+    transition: border-color 0.2s ease !important;
+}
+
+.gradio-container .gr-textbox:focus {
+    border-color: var(--yt-spec-brand-button-text) !important;
+    outline: none !important;
+    box-shadow: 0 0 0 1px var(--yt-spec-brand-button-text) !important;
+}
+
+.gradio-container .gr-textbox::placeholder {
+    color: var(--yt-spec-text-secondary) !important;
+}
+
+/* YouTube-style buttons */
+.gradio-container .gr-button {
+    background-color: var(--yt-spec-raised-background) !important;
+    border: 1px solid var(--yt-spec-outline) !important;
+    border-radius: 18px !important;
+    color: var(--yt-spec-text-primary) !important;
+    font-weight: 500 !important;
+    font-size: 14px !important;
+    padding: 10px 16px !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    transition: all 0.2s ease !important;
+    cursor: pointer !important;
+}
+
+.gradio-container .gr-button:hover {
+    background-color: var(--yt-spec-button-chip-background-hover) !important;
+    border-color: var(--yt-spec-text-secondary) !important;
+}
+
+/* Primary button (YouTube red theme) */
+.gradio-container .gr-button.primary {
+    background-color: var(--yt-spec-call-to-action) !important;
+    border-color: var(--yt-spec-call-to-action) !important;
+    color: white !important;
+}
+
+.gradio-container .gr-button.primary:hover {
+    background-color: #b30000 !important;
+    border-color: #b30000 !important;
+}
+
+/* Labels styling */
+.gradio-container .gr-form label {
+    color: var(--yt-spec-text-primary) !important;
+    font-weight: 500 !important;
+    font-size: 14px !important;
+    margin-bottom: 8px !important;
+}
+
+/* Column containers with YouTube-style cards */
+.gradio-container .gr-column {
+    background-color: var(--yt-spec-raised-background) !important;
+    border-radius: 12px !important;
+    padding: 20px !important;
+    margin: 8px !important;
+    border: 1px solid var(--yt-spec-outline) !important;
+}
+
+/* Markdown content styling */
+.gradio-container .gr-markdown h3 {
+    color: var(--yt-spec-text-primary) !important;
+    font-size: 18px !important;
+    font-weight: 600 !important;
+    margin-bottom: 16px !important;
+    display: flex !important;
+    align-items: center !important;
+}
+
+/* Output textboxes with YouTube comment-like styling */
+.gradio-container .gr-textbox[data-testid="textbox"]:not([data-testid*="input"]) {
+    background-color: var(--yt-spec-base-background) !important;
+    border: 1px solid var(--yt-spec-outline) !important;
+    border-radius: 8px !important;
+    color: var(--yt-spec-text-primary) !important;
+    line-height: 1.6 !important;
+    font-size: 14px !important;
+}
+
+/* Scrollbar styling to match YouTube */
+.gradio-container ::-webkit-scrollbar {
+    width: 8px;
+}
+
+.gradio-container ::-webkit-scrollbar-track {
+    background: var(--yt-spec-base-background);
+}
+
+.gradio-container ::-webkit-scrollbar-thumb {
+    background: var(--yt-spec-text-disabled);
+    border-radius: 4px;
+}
+
+.gradio-container ::-webkit-scrollbar-thumb:hover {
+    background: var(--yt-spec-text-secondary);
+}
+
+/* Row styling */
+.gradio-container .gr-row {
+    gap: 16px !important;
+}
+
+/* Main title with YouTube branding */
+.gradio-container h2[style*="text-align: center"] {
+    background: linear-gradient(45deg, var(--yt-spec-wordmark-text), #ff6b6b) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;
+    font-size: 28px !important;
+    font-weight: 700 !important;
+    margin-bottom: 32px !important;
+}
+
+/* Loading/status indicators */
+.gradio-container .gr-loading {
+    color: var(--yt-spec-brand-button-text) !important;
+}
+
+/* Focus states for accessibility */
+.gradio-container *:focus {
+    outline: 2px solid var(--yt-spec-brand-button-text) !important;
+    outline-offset: 2px !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .gradio-container .gr-column {
+        margin: 4px !important;
+        padding: 16px !important;
+    }
+
+    .gradio-container .gr-row {
+        flex-direction: column !important;
+    }
+}
+
+/* Dark mode enhancements */
+.gradio-container {
+    --background-fill-primary: var(--yt-spec-base-background);
+    --background-fill-secondary: var(--yt-spec-raised-background);
+    --border-color-primary: var(--yt-spec-outline);
+    --block-title-text-color: var(--yt-spec-text-primary);
+    --block-label-text-color: var(--yt-spec-text-primary);
+    --body-text-color: var(--yt-spec-text-primary);
+}
